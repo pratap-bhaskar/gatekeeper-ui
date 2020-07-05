@@ -1,0 +1,36 @@
+@using System.Collections.Generic
+@using Newtonsoft.Json.Linq
+@using GatekeeperView.Models
+@model ConstraintTemplate
+@{
+    ViewData["Title"] = Model.Metadata.Name;
+}
+
+<h1>@Model.Metadata.Name</h1>
+<hr>
+<h2>Rego</h2>
+<pre>
+@Html.Raw(Model.Spec.Targets.FirstOrDefault()?.Rego.ToString())
+</pre>
+
+@if(Model.Status.ByPod.Any(a=> a.Errors != null))
+{
+    var flattenedErrors = Model.Status.ByPod.SelectMany(a=> a.Errors);
+    <table class="table table-bordered table-responsive table-hover table-striped">
+    <tr>
+        <th>Error Code</th>
+        <th>Location</th>
+        <th>Message</th>
+    </tr>
+    @foreach (var error in flattenedErrors)
+    {
+        <tr>
+            <td>@error.Code</td>
+            <td>@error.Location</td>
+            <td>@error.Message</td>
+        </tr>
+    }
+    </table>
+
+}
+

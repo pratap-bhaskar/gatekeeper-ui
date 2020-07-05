@@ -1,0 +1,22 @@
+@using System.Collections.Generic
+@using Newtonsoft.Json.Linq
+@using GatekeeperView.Models
+@model IEnumerable<ConstraintTemplate>
+@{
+    ViewData["Title"] = "Templates";
+}
+
+<table class="table table-bordered table-condensed table-striped table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Is Created Successfully</th>
+    </tr>
+    @foreach (var template in this.Model)
+    {
+        <tr>
+            <td>@template.Metadata.Name</td>
+            <td>@template.Status.Created</td>
+            <td>@Html.ActionLink("Details", "Details", "Templates", new {name = template.Metadata.Name})</td>
+        </tr>
+    }
+</table>

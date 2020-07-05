@@ -1,0 +1,6 @@
+namespace: gatekeeper-system
+resources:
+- deployment.yaml
+- service.yaml
+- rbac.yaml
+- serviceaccount.yaml

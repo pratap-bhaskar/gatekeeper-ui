@@ -1,0 +1,27 @@
+﻿@using System.Collections.Generic
+@using Newtonsoft.Json.Linq
+@using GatekeeperView.Models
+@model IEnumerable<Constraint>
+@{
+    ViewData["Title"] = "Constraints";
+}
+
+<table class="table table-bordered table-condensed table-striped table-hover">
+    <tr>
+        <th>Constraint Name</th>
+        <th>Enforcement Action</th>
+        <th>Template Name</th>
+        <th>Total Violations</th>
+    </tr>
+    @foreach (var constraint in this.Model)
+    {
+        var spec = @constraint.Spec as JObject;
+        <tr>
+            <td>@constraint.Metadata.Name</td>
+            <td>@spec?.SelectToken("enforcementAction")?.ToString()</td>
+            <td>@Html.ActionLink(constraint.Kind.ToLower(), "Details", "Templates", new { name = constraint.Kind.ToLower()})</td>
+            <td>@constraint.Status.TotalViolations</td>
+            <td>@Html.ActionLink("Details", "Details", "Home", new {name = constraint.Metadata.Name, template = constraint.Kind })</td>
+        </tr>
+    }
+</table>

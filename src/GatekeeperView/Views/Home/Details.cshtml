@@ -1,0 +1,38 @@
+@using System.Collections.Generic
+@using Newtonsoft.Json.Linq
+@using GatekeeperView.Models
+@model Constraint
+@{
+    ViewData["Title"] = "Constraints Details";
+}
+
+<h1>@Model.Metadata.Name</h1>
+<hr>
+<h3>Template: @Html.ActionLink(Model.Kind.ToLower(), "Details", "Templates", new { name = Model.Kind.ToLower()})</h3>
+<hr>
+<h3>Violations: @Model.Status.TotalViolations</h3>
+<hr>
+<table class="table table-bordered table-responsive table-hover table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Namespace</th>
+        <th>Kind</th>
+        <th>Enforcement Action</th>
+        <th>Message</th>
+    </tr>
+    @foreach (var violation in this.Model.Status.Violations)
+    {
+        <tr>
+            <td>@violation.Name</td>
+            <td>@violation.Namespace</td>
+            <td>@violation.Kind</td>
+            <td>@violation.EnforcementAction</td>
+            <td>@violation.Message</td>
+        </tr>
+    }
+</table>
+<hr>
+<h2>Spec:</h2>
+<pre>
+@Html.Raw(Model.Spec.ToString())
+</pre>
