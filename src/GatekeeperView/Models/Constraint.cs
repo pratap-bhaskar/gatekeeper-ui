@@ -11,6 +11,7 @@ namespace GatekeeperView.Models
         public ConstraintStatus Status { get; set; }
         public string DemoString { get; set; }
 
-        public string DemoString1 { get; set; }
+        public string DemoString2 { get; set; }
+	
     }
 }
