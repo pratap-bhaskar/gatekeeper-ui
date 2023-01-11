@@ -9,5 +9,8 @@ namespace GatekeeperView.Models
         public V1ObjectMeta Metadata { get; set; }
         public dynamic Spec { get; set; }
         public ConstraintStatus Status { get; set; }
+        public string DemoString { get; set; }
+
+        public string DemoString1 { get; set; }
     }
 }
